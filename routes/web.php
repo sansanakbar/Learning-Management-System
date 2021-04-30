@@ -2,9 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\AdminLogController;
 use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SiswaDashboardController;
 
 /*
@@ -28,6 +29,8 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/admindashboard', [AdminDashboardController::class, 'index'])->name('admindashboard');
+
+Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 
 Route::get('/gurudashboard', [GuruDashboardController::class, 'index'])->name('gurudashboard');
 

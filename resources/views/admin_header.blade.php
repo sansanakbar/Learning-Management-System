@@ -45,7 +45,7 @@
                         <a href="">Manajemen Akun</a>
                     </li>
                     <li>
-                        <a href="">Log Data</a>
+                        <a href="{{route('adminlog')}}">Log Data</a>
                     </li>
                 </ul>
             </div>
