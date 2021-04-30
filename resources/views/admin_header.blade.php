@@ -42,7 +42,7 @@
                         <a href="{{route('admindashboard')}}">Dashboard</a>
                     </li>
                     <li>
-                        <a href="">Manajemen Akun</a>
+                        <a href="{{route('adminolahakun')}}">Manajemen Akun</a>
                     </li>
                     <li>
                         <a href="{{route('adminlog')}}">Log Data</a>

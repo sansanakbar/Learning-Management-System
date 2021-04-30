@@ -6,6 +6,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminLogController;
 use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\AdminOlahAkunController;
 use App\Http\Controllers\SiswaDashboardController;
 
 /*
@@ -20,7 +21,7 @@ use App\Http\Controllers\SiswaDashboardController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('welcome');
 });
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -29,6 +30,8 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 
 Route::get('/admindashboard', [AdminDashboardController::class, 'index'])->name('admindashboard');
+
+Route::get('/adminolahakun', [AdminOlahAkunController::class, 'index'])->name('adminolahakun');
 
 Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 
