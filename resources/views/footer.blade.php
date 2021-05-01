@@ -1,4 +1,3 @@
-@section('footer')
+        <p>Footer</p>
     </body>
-    </html>
-@endsection
+</html>

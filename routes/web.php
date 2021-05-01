@@ -32,6 +32,7 @@ Route::post('/logout', [LogoutController::class, 'store'])->name('logout');
 Route::get('/admindashboard', [AdminDashboardController::class, 'index'])->name('admindashboard');
 
 Route::get('/adminolahakun', [AdminOlahAkunController::class, 'index'])->name('adminolahakun');
+Route::post('/adminolahakun', [AdminOlahAkunController::class, 'store'])->name('buatakun');
 
 Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 

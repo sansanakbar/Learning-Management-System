@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>Learning Management System</title>
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     </head>
     <body>
-        <div id="menu-outer">
-            <div class="table">
+        <div>
+            <div>
                 <nav>
                     <ul>
                         <li>icon</li>
@@ -52,4 +53,4 @@
         </div>
         
         @yield('content')
-    @yield('footer')
+    @include('footer')
