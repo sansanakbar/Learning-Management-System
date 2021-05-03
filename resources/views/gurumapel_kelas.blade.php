@@ -14,8 +14,14 @@
             </tr>
             @foreach ($kelass as $kelas)
                 <tr>
-                    <td>{{$nokelas++}}</td>
-                    <td><a href="">{{$kelas->tahun_kelas}}</a></td>
+                    <td>
+                        {{$nokelas++}}
+                    </td>
+                    <td>
+                        <a href="{{route('gurumapelkelasdetail', ['gurumapel' => $guruMapel, 'gurumapelkelas' => $kelas->id])}}">
+                            {{$kelas->tahun_kelas}}
+                        </a>
+                    </td>
                     <td>
                         
                     </td>

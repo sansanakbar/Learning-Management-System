@@ -25,6 +25,6 @@ class GuruMapelKelasController extends Controller
                 ->first();
         //dd($kelass);
         //dd($mapel);
-        return view('gurumapel_kelas', ['gurumapel' => $guruMapel], compact('kelass', 'nokelas', 'mapel'));
+        return view('gurumapel_kelas', ['gurumapel' => $guruMapel], compact('kelass', 'nokelas', 'mapel', 'guruMapel'));
     }
 }

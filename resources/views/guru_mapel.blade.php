@@ -13,10 +13,16 @@
             </tr>
             @foreach ($mapels as $mapel)
                 <tr>
-                    <td>{{$noMapel++}}</td>
-                    <td>{{$mapel->kode_mapel}}</td>
                     <td>
-                        <a href="{{route('gurumapelkelas', $mapel->id)}}">{{$mapel->nama_mapel}}</a>
+                        {{$noMapel++}}
+                    </td>
+                    <td>
+                        {{$mapel->kode_mapel}}
+                    </td>
+                    <td>
+                        <a href="{{route('gurumapelkelas', $mapel->id)}}">
+                            {{$mapel->nama_mapel}}
+                        </a>
                     </td>
                 </tr>
             @endforeach
