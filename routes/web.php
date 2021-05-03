@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminLogController;
+use App\Http\Controllers\GuruMapelController;
+use App\Http\Controllers\AdminOlahAkunController;
 use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\AdminDashboardController;
-use App\Http\Controllers\AdminOlahAkunController;
+use App\Http\Controllers\GuruMapelKelasController;
 use App\Http\Controllers\SiswaDashboardController;
 
 /*
@@ -37,5 +39,9 @@ Route::post('/adminolahakun', [AdminOlahAkunController::class, 'store'])->name('
 Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 
 Route::get('/gurudashboard', [GuruDashboardController::class, 'index'])->name('gurudashboard');
+
+Route::get('/gurumapel', [GuruMapelController::class, 'index'])->name('gurumapel');
+
+Route::get('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'index'])->name('gurumapelkelas');
 
 Route::get('/siswadashboard', [SiswaDashboardController::class, 'index'])->name('siswadashboard');
