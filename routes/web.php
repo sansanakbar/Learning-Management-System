@@ -5,12 +5,16 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminLogController;
 use App\Http\Controllers\GuruMapelController;
+use App\Http\Controllers\SiswaMapelController;
+use App\Http\Controllers\SiswaNilaiController;
 use App\Http\Controllers\AdminOlahAkunController;
 use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\GuruMapelKelasController;
-use App\Http\Controllers\GuruMapelKelasDetailController;
 use App\Http\Controllers\SiswaDashboardController;
+use App\Http\Controllers\SiswaMapelDetailController;
+use App\Http\Controllers\SiswaJawabanTugasController;
+use App\Http\Controllers\GuruMapelKelasDetailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,3 +52,11 @@ Route::get('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'index'])
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMapelKelasDetailController::class, 'index'])->name('gurumapelkelasdetail');
 
 Route::get('/siswadashboard', [SiswaDashboardController::class, 'index'])->name('siswadashboard');
+
+Route::get('/siswamapel', [SiswaMapelController::class, 'index'])->name('siswamapel');
+
+Route::get('/siswamapel/{gurumapelkelas}', [SiswaMapelDetailController::class, 'index'])->name('siswamapeldetail');
+
+Route::get('/siswamapel/{gurumapelkelas}/tugas/{tugas}', [SiswaJawabanTugasController::class, 'index'])->name('siswajawabantugas');
+
+Route::get('/siswanilai', [SiswaNilaiController::class, 'index'])->name('siswanilai');

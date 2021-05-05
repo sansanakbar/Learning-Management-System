@@ -43,10 +43,10 @@
                         <a href="{{route('siswadashboard')}}">Dashboard</a>
                     </li>
                     <li>
-                        <a href="">Mata Pelajaran</a>
+                        <a href="{{route('siswamapel')}}">Mata Pelajaran</a>
                     </li>
                     <li>
-                        <a href="">Nilai</a>
+                        <a href="{{route('siswanilai')}}">Nilai</a>
                     </li>
                 </ul>
             </div>
