@@ -23,7 +23,11 @@
                     <td>{{$guru->username}}</td>
                     <td>Details</td>
                     <td>Edit</td>
-                    <td>Delete</td>
+                    <td>
+                        <a href="">
+                            Delete
+                        </a>
+                    </td>
                 </tr>
             @endforeach
         </table>

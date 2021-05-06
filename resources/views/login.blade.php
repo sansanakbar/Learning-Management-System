@@ -12,7 +12,7 @@
             <div>
                 <label for="">Username</label>
                 <input type="text" placeholder="Username" name="username" id="username"
-                value="{{old('username')}}">
+                value="{{old('username')}}" autofocus>
                 @error('username')
                     <div>
                         {{$message}}

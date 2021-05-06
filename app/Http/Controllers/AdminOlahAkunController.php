@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Log;
 use App\Models\User;
+use App\Models\Kelas;
+use App\Models\Mapel;
+use App\Models\ProfilGuru;
+use App\Models\ProfilSiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -12,12 +16,12 @@ use Illuminate\Support\Facades\Hash;
 class AdminOlahAkunController extends Controller
 {
     public function index(){
-        $gurus = User::leftjoin('profil_guru', 'users.id', '=', 'profil_guru.id_guru')->where('jenis_akun', 1)->paginate(10);
-        $siswas = User::leftjoin('profil_siswa', 'users.id', '=', 'profil_siswa.id_siswa')->where('jenis_akun', 2)->paginate(10);
+        $gurus = User::leftjoin('profil_gurus', 'users.id', '=', 'profil_gurus.id_guru')->where('jenis_akun', 1)->paginate(10);
+        $siswas = User::leftjoin('profil_siswas', 'users.id', '=', 'profil_siswas.id_siswa')->where('jenis_akun', 2)->paginate(10);
         $noguru = 1;
         $nosiswa = 1;
-        $mapels = DB::table('mapels')->get();
-        $kelass = DB::table('kelass')->orderBy('no_kelas')->orderBy('tahun_kelas')->get();
+        $mapels = Mapel::get();
+        $kelass = Kelas::orderBy('no_kelas')->orderBy('tahun_kelas')->get();
         return view('admin_olahakun', compact('gurus', 'siswas', 'noguru', 'nosiswa', 'mapels', 'kelass'));
     }
 
@@ -43,7 +47,7 @@ class AdminOlahAkunController extends Controller
             case 0:
                 break;
             case 1:
-                DB::table('profil_guru')->insert([
+                ProfilGuru::insert([
                     'id_guru' => $idakun,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,
@@ -53,7 +57,7 @@ class AdminOlahAkunController extends Controller
                 ]);
                 break;
             case 2:
-                DB::table('profil_siswa')->insert([
+                ProfilSiswa::insert([
                     'id_siswa' => $idakun,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,
@@ -72,6 +76,11 @@ class AdminOlahAkunController extends Controller
             'function' => "Membuat akun ID ".$idakun,
             'date' => $timestamp
         ]);
+        
+        return redirect()->route('adminolahakun');
+    }
+
+    public function delete(){
         
         return redirect()->route('adminolahakun');
     }

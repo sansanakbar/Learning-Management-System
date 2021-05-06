@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\GuruMapel;
+use App\Models\GuruMapelDetail;
+use App\Models\GuruMapelKelasDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -12,16 +14,14 @@ class GuruMapelKelasController extends Controller
         //$idGuruMapel = $guruMapel;
         //dd($idGuruMapel);
         $nokelas = 1;
-        $kelass = DB::table('gurumapel_kelas_detail')
-                ->leftjoin('kelass', 'gurumapel_kelas_detail.id_kelas', '=', 'kelass.id')
+        $kelass = GuruMapelKelasDetail::leftjoin('kelas', 'gurumapel_kelas_details.id_kelas', '=', 'kelas.id')
                 ->where('id_gurumapel', $guruMapel)
-                ->select('gurumapel_kelas_detail.*', 'kelass.tahun_kelas', 'kelass.no_kelas')
-                ->orderBy('kelass.no_kelas')
+                ->select('gurumapel_kelas_details.*', 'kelas.tahun_kelas', 'kelas.no_kelas')
+                ->orderBy('kelas.no_kelas')
                 ->get();
 
-        $mapel = DB::table('guru_mapel_detail')
-                ->join('mapels', 'guru_mapel_detail.id_mapel', '=', 'mapels.id')
-                ->where('guru_mapel_detail.id', $guruMapel)
+        $mapel = GuruMapelDetail::join('mapels', 'guru_mapel_details.id_mapel', '=', 'mapels.id')
+                ->where('guru_mapel_details.id', $guruMapel)
                 ->first();
         //dd($kelass);
         //dd($mapel);
