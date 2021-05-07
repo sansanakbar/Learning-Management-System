@@ -58,7 +58,7 @@ class GuruMapelController extends Controller
     }
 
     public function destroy($id){
-        $user = GuruMapelDetail::where('id', $id)->firstorfail()->delete();
+        $guruMapel = GuruMapelDetail::where('id', $id)->firstorfail()->delete();
         //$user->delete();
 
         $id_guru = auth()->user()->id;

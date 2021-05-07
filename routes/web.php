@@ -52,6 +52,8 @@ Route::post('/gurumapel', [GuruMapelController::class, 'store'])->name('tambahGu
 Route::get('/gurumapel/destroy/{idGuruMapel}', [GuruMapelController::class, 'destroy'])->name('hapusGuruMapel');
 
 Route::get('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'index'])->name('gurumapelkelas');
+Route::post('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'store'])->name('tambahGuruMapelKelas');
+Route::get('/gurumapel/{gurumapel}/destroy/{idGuruMapelKelas}', [GuruMapelKelasController::class, 'destroy'])->name('hapusGuruMapelKelas');
 
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMapelKelasDetailController::class, 'index'])->name('gurumapelkelasdetail');
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Log;
+use App\Models\Kelas;
 use App\Models\GuruMapel;
-use App\Models\GuruMapelDetail;
-use App\Models\GuruMapelKelasDetail;
 use Illuminate\Http\Request;
+use App\Models\GuruMapelDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\GuruMapelKelasDetail;
 
 class GuruMapelKelasController extends Controller
 {
@@ -24,11 +27,57 @@ class GuruMapelKelasController extends Controller
                 ->orderBy('kelas.no_kelas')
                 ->get();
 
+        $allKelass = Kelas::get();
+
         $mapel = GuruMapelDetail::join('mapels', 'guru_mapel_details.id_mapel', '=', 'mapels.id')
                 ->where('guru_mapel_details.id', $guruMapel)
                 ->first();
         //dd($kelass);
         //dd($mapel);
-        return view('gurumapel_kelas', ['gurumapel' => $guruMapel], compact('kelass', 'nokelas', 'mapel', 'guruMapel'));
+        return view('gurumapel_kelas', ['gurumapel' => $guruMapel], compact('kelass', 'nokelas', 'mapel', 'guruMapel', 'allKelass'));
+    }
+
+    public function store(Request $request, $guruMapel){
+        $kelass = $request->kelas;
+        $idAkun = auth()->user()->id;
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        foreach($kelass as $kelas){
+            $testKelas = GuruMapelKelasDetail::where([
+                'id_gurumapel' => $guruMapel,
+                'id_kelas' => $kelas
+            ])->first();
+
+            //dd($testMapel);
+
+            if($testKelas==NULL){
+                GuruMapelKelasDetail::insert([
+                    'id_gurumapel' => $guruMapel,
+                    'id_kelas' => $kelas
+                ]);
+                Log::create([
+                    'user_id' => $idAkun,
+                    'function' => "Menambah Kelas Ajar ".$kelas,
+                    'date' => $timestamp
+                ]);
+            }
+        }
+        return redirect()->route('gurumapelkelas', $guruMapel);
+    }
+
+    public function destroy($guruMapel, $id){
+        $guruMapelKelas = GuruMapelKelasDetail::where('id', $id)->firstorfail()->delete();
+        //$user->delete();
+
+        $id_guru = auth()->user()->id;
+        $timestamp = Carbon::now()->toDateTimeString();
+
+        Log::create([
+            'user_id' => $id_guru,
+            'function' => "Guru Melepaskan Mata Pelajaran ID ".$id,
+            'date' => $timestamp
+        ]);
+        
+        return redirect()->route('gurumapelkelas', $guruMapel);
     }
 }
