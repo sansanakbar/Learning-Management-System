@@ -40,8 +40,8 @@ Route::get('/admindashboard', [AdminDashboardController::class, 'index'])->name(
 
 Route::get('/adminolahakun', [AdminOlahAkunController::class, 'index'])->name('adminolahakun');
 Route::post('/adminolahakun', [AdminOlahAkunController::class, 'store'])->name('buatakun');
-Route::post('/adminolahakun/{idAkun}', [AdminOlahAkunController::class, 'update'])->name('editAkun');
-Route::get('/adminolahakun/{idakun}', [AdminOlahAkunController::class, 'destroy'])->name('hapusakun');
+Route::post('/adminolahakun/update/{idAkun}', [AdminOlahAkunController::class, 'update'])->name('editAkun');
+Route::get('/adminolahakun/destroy/{idakun}', [AdminOlahAkunController::class, 'destroy'])->name('hapusakun');
 
 Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 
@@ -49,7 +49,7 @@ Route::get('/gurudashboard', [GuruDashboardController::class, 'index'])->name('g
 
 Route::get('/gurumapel', [GuruMapelController::class, 'index'])->name('gurumapel');
 Route::post('/gurumapel', [GuruMapelController::class, 'store'])->name('tambahGuruMapel');
-Route::get('/gurumapel/{idGuruMapel}', [GuruMapelController::class, 'destroy'])->name('hapusGuruMapel');
+Route::get('/gurumapel/destroy/{idGuruMapel}', [GuruMapelController::class, 'destroy'])->name('hapusGuruMapel');
 
 Route::get('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'index'])->name('gurumapelkelas');
 
