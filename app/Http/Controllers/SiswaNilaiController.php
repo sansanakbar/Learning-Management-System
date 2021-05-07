@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 
 class SiswaNilaiController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth']);
+    } 
+    
     public function index(){
         $idUser = auth()->user()->id;
         $idKelas = ProfilSiswa::where('id_siswa', $idUser)->value('id_kelas');

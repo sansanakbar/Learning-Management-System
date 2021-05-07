@@ -40,6 +40,8 @@ Route::get('/admindashboard', [AdminDashboardController::class, 'index'])->name(
 
 Route::get('/adminolahakun', [AdminOlahAkunController::class, 'index'])->name('adminolahakun');
 Route::post('/adminolahakun', [AdminOlahAkunController::class, 'store'])->name('buatakun');
+Route::post('/adminolahakun/{idAkun}', [AdminOlahAkunController::class, 'update'])->name('editAkun');
+Route::get('/adminolahakun/{idakun}', [AdminOlahAkunController::class, 'destroy'])->name('hapusakun');
 
 Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 

@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\DB;
 
 class SiswaMapelDetailController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth']);
+    } 
+    
     public function index($idGuruMapelKelas){
         $noMateri = 1;
         $materis = GuruMapelKelasMateriDetail::join('materis', 'gurumapelkelas_materi_details.id_materi', '=', 'materis.id')
