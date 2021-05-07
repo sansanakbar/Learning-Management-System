@@ -39,7 +39,7 @@
             <div>
                 <ul>
                     <li>
-                        <a href="">Guru</a>
+                        Guru
                     </li>
                     <li>
                         <a href="{{route('gurudashboard')}}">Dashboard</a>

@@ -48,6 +48,8 @@ Route::get('/adminlog', [AdminLogController::class, 'index'])->name('adminlog');
 Route::get('/gurudashboard', [GuruDashboardController::class, 'index'])->name('gurudashboard');
 
 Route::get('/gurumapel', [GuruMapelController::class, 'index'])->name('gurumapel');
+Route::post('/gurumapel', [GuruMapelController::class, 'store'])->name('tambahGuruMapel');
+Route::get('/gurumapel/{idGuruMapel}', [GuruMapelController::class, 'destroy'])->name('hapusGuruMapel');
 
 Route::get('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'index'])->name('gurumapelkelas');
 

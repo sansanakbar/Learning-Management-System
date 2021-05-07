@@ -39,7 +39,7 @@
             <div>
                 <ul>
                     <li>
-                        <a href="">Admin</a>
+                        Admin
                     </li>
                     <li>
                         <a href="{{route('admindashboard')}}">Dashboard</a>
