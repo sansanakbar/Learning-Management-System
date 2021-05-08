@@ -11,6 +11,10 @@ use App\Models\GuruMapelKelasMateriDetail;
 
 class GuruMateriController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth']);
+    } 
+    
     public function store(Request $request, $idGuruMapel, $idGuruMapelKelas){
         $this->validate($request, [
             'judul_materi' => 'required',
@@ -96,7 +100,7 @@ class GuruMateriController extends Controller
         ]);
     }
 
-    public function download($idGuruMapel, $idGuruMapelKelas, $idMateri){
+    public function download($idMateri){
         $dl = Materi::find($idMateri);
         return Storage::download($dl->path, $dl->lampiran_materi);
     }
@@ -105,7 +109,6 @@ class GuruMateriController extends Controller
         $idMateri = GuruMapelKelasMateriDetail::where('id', $idGuruMapelKelasMateri)->value('id_materi');
         GuruMapelKelasMateriDetail::where('id', $idGuruMapelKelasMateri)->firstorfail()->delete();
         Materi::where('id', $idMateri)->firstorfail()->delete();
-        //$user->delete();
 
         $idAkun = auth()->user()->id;
         $timestamp = Carbon::now()->toDateTimeString();

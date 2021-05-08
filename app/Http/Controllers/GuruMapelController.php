@@ -18,14 +18,14 @@ class GuruMapelController extends Controller
     public function index(){
         $idGuru = auth()->user()->id;
         $noMapel = 1;
-        //$mapels = DB::table('guru_mapel_detail')->leftjoin('mapels', "guru_mapel_detail.id_mapel", "=", "mapels.id")->where('id_guru', $idGuru)->get();
+
         $mapels = GuruMapelDetail::join('mapels', "guru_mapel_details.id_mapel", "=", "mapels.id")
                 ->where('id_guru', $idGuru)
                 ->select('guru_mapel_details.*', 'mapels.kode_mapel', 'mapels.nama_mapel', 'mapels.deskripsi_mapel')
                 ->get();
 
         $allMapels = Mapel::get();
-        //dd($mapels);
+        
         return view('guru_mapel', compact('mapels', 'noMapel', 'allMapels', 'idGuru'));
     }
 
@@ -40,10 +40,8 @@ class GuruMapelController extends Controller
                 'id_mapel' => $mapel
             ])->first();
 
-            //dd($testMapel);
-
             if($testMapel==NULL){
-                GuruMapelDetail::insert([
+                GuruMapelDetail::create([
                     'id_guru' => $idAkun,
                     'id_mapel' => $mapel
                 ]);
@@ -58,8 +56,7 @@ class GuruMapelController extends Controller
     }
 
     public function destroy($id){
-        $guruMapel = GuruMapelDetail::where('id', $id)->firstorfail()->delete();
-        //$user->delete();
+        GuruMapelDetail::where('id', $id)->firstorfail()->delete();
 
         $id_guru = auth()->user()->id;
         $timestamp = Carbon::now()->toDateTimeString();

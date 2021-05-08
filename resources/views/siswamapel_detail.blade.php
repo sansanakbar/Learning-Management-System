@@ -18,7 +18,7 @@
                         {{$noMateri++}}
                     </td>
                     <td>
-                        <a href="">
+                        <a href="" data-toggle="modal" data-target="#lihatMateriModal{{$materi->id}}">
                             {{$materi->judul_materi}}
                         </a>
                     </td>
@@ -26,6 +26,8 @@
             @endforeach
         </table>
     </div>
+
+    <hr>
 
     <div>
         <b>Tabel Tugas</b>
@@ -40,7 +42,7 @@
                         {{$noTugas++}}
                     </td>
                     <td>
-                        <a href="{{route('siswajawabantugas', ['gurumapelkelas' => $tugas->id_gurumapelkelas, 'tugas' => $tugas->id_tugas])}}">
+                        <a href="{{route('siswajawabantugas', ['gurumapelkelas' => $tugas->id_gurumapelkelas, 'gurumapelkelastugas' => $tugas->id])}}">
                             {{$tugas->judul_tugas}}
                         </a>
                     </td>
@@ -48,4 +50,28 @@
             @endforeach
         </table>
     </div>
+
+    @foreach ($materis as $materi)
+        <div id="lihatMateriModal{{$materi->id}}" class="modal">
+            <div class="modal-content">
+                <b>Lihat Materi</b>
+                <div>
+                    <p>Judul Materi: {{$materi->judul_materi}}</p>
+                </div>
+
+                <div>
+                    <p>Deskripsi Materi: </p>
+                    <p>{{$materi->isi_materi}}</p>
+                </div>
+
+                <div>
+                    <p>Lampiran: <a href="{{route('downloadMateri', [
+                        'idMateri' => $materi->id_materi
+                    ])}}">
+                        {{$materi->lampiran_materi}}
+                    </a></p>
+                </div>
+            </div>
+        </div>
+    @endforeach
 @endsection

@@ -22,8 +22,6 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        //dd($request);
-
         if(!Auth::attempt($request->only('username', 'password'), $request->remember)){
             return back()->with('status', 'Username atau password salah');
         }
@@ -49,7 +47,5 @@ class LoginController extends Controller
                 return redirect()->route('siswadashboard');
                 break;
         }
-
-        //return redirect()->route('admindashboard');
     }
 }

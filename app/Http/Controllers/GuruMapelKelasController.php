@@ -18,13 +18,12 @@ class GuruMapelKelasController extends Controller
     } 
     
     public function index($guruMapel){
-        //$idGuruMapel = $guruMapel;
-        //dd($idGuruMapel);
         $nokelas = 1;
         $kelass = GuruMapelKelasDetail::leftjoin('kelas', 'gurumapel_kelas_details.id_kelas', '=', 'kelas.id')
                 ->where('id_gurumapel', $guruMapel)
                 ->select('gurumapel_kelas_details.*', 'kelas.tahun_kelas', 'kelas.no_kelas')
                 ->orderBy('kelas.no_kelas')
+                ->orderBy('kelas.tahun_kelas')
                 ->get();
 
         $allKelass = Kelas::get();
@@ -32,8 +31,7 @@ class GuruMapelKelasController extends Controller
         $mapel = GuruMapelDetail::join('mapels', 'guru_mapel_details.id_mapel', '=', 'mapels.id')
                 ->where('guru_mapel_details.id', $guruMapel)
                 ->first();
-        //dd($kelass);
-        //dd($mapel);
+
         return view('gurumapel_kelas', ['gurumapel' => $guruMapel], compact('kelass', 'nokelas', 'mapel', 'guruMapel', 'allKelass'));
     }
 
@@ -48,10 +46,8 @@ class GuruMapelKelasController extends Controller
                 'id_kelas' => $kelas
             ])->first();
 
-            //dd($testMapel);
-
             if($testKelas==NULL){
-                GuruMapelKelasDetail::insert([
+                GuruMapelKelasDetail::create([
                     'id_gurumapel' => $guruMapel,
                     'id_kelas' => $kelas
                 ]);
@@ -66,15 +62,14 @@ class GuruMapelKelasController extends Controller
     }
 
     public function destroy($guruMapel, $id){
-        $guruMapelKelas = GuruMapelKelasDetail::where('id', $id)->firstorfail()->delete();
-        //$user->delete();
+        GuruMapelKelasDetail::where('id', $id)->firstorfail()->delete();
 
         $id_guru = auth()->user()->id;
         $timestamp = Carbon::now()->toDateTimeString();
 
         Log::create([
             'user_id' => $id_guru,
-            'function' => "Guru Melepaskan Mata Pelajaran ID ".$id,
+            'function' => "Guru Melepas Mata Pelajaran ID ".$id,
             'date' => $timestamp
         ]);
         

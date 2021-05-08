@@ -14,11 +14,15 @@ use App\Models\GuruMapelKelasTugasDetail;
 
 class GuruJawabanTugasController extends Controller
 {
+    public function __construct(){
+        $this->middleware(['auth']);
+    } 
+    
     public function index($idGuruMapel, $idGuruMapelKelas, $idGuruMapelKelasTugas){
         $idKelas = GuruMapelKelasDetail::where('id', $idGuruMapelKelas)->value('id_kelas');
 
         $noSiswa = 1;
-        $siswas = ProfilSiswa::leftjoin('jawaban_tugas', 'profil_siswas.id_siswa', '=', 'jawaban_tugas.id_siswa')
+        $siswas = JawabanTugas::join('profil_siswas', 'profil_siswas.id_siswa', '=', 'jawaban_tugas.id_siswa')
                     ->where([
                         'profil_siswas.id_kelas' => $idKelas,
                         'jawaban_tugas.id_gurumapelkelastugas' => $idGuruMapelKelasTugas
@@ -37,7 +41,6 @@ class GuruJawabanTugasController extends Controller
 
         $idTugas = GuruMapelKelasTugasDetail::where('id', $idGuruMapelKelasTugas)->value('id_tugas');
         $tugas = Tugas::where('id', $idTugas)->first();
-        //dd($siswas);
         
         return view('guru_jawabantugas', [
             'gurumapel' => $idGuruMapel,

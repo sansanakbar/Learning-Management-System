@@ -11,6 +11,8 @@ class JawabanTugas extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'id_siswa',
+        'id_gurumapelkelastugas',
         'isi_jawabantugas',
         'lampiran_jawabantugas',
         'path',

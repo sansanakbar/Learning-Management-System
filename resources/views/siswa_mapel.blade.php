@@ -26,9 +26,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="">
-                            {{$mapel->nama}}
-                        </a>
+                        {{$mapel->nama}}
                     </td>
                 </tr>
             @endforeach

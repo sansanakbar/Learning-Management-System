@@ -50,6 +50,9 @@
                     <li>
                         <a href="{{route('siswanilai')}}">Nilai</a>
                     </li>
+                    <li>
+                        <a href="{{route('siswalaporan')}}">Laporan</a>
+                    </li>
                 </ul>
             </div>
         </div>

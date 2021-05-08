@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GuruMapelKelasDetail;
-use App\Models\GuruMapelKelasTugasDetail;
 use App\Models\ProfilSiswa;
+use App\Models\JawabanTugas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Models\GuruMapelKelasDetail;
+use App\Models\GuruMapelKelasTugasDetail;
 
 class SiswaNilaiController extends Controller
 {
@@ -33,16 +34,18 @@ class SiswaNilaiController extends Controller
                 ->get();
 
         $noTugas = 1;
-        $tugass = GuruMapelKelasTugasDetail::join('tugas', 'gurumapelkelas_tugas_details.id_tugas', '=', 'tugas.id')
-                    ->leftjoin('jawaban_tugas', 'gurumapelkelas_tugas_details.id', '=', 'jawaban_tugas.id_gurumapelkelastugas')
+        $tugass = JawabanTugas::join('gurumapelkelas_tugas_details', 'gurumapelkelas_tugas_details.id', '=', 'jawaban_tugas.id_gurumapelkelastugas')
+                    ->join('tugas', 'gurumapelkelas_tugas_details.id_tugas', '=', 'tugas.id')
                     ->select(
-                        'gurumapelkelas_tugas_details.*', 
+                        'jawaban_tugas.*',
+                        'gurumapelkelas_tugas_details.id_tugas', 
+                        'gurumapelkelas_tugas_details.id_gurumapelkelas',
                         'tugas.judul_tugas', 
                         'tugas.isi_tugas', 
-                        'tugas.lampiran_tugas',
-                        'jawaban_tugas.nilai'
+                        'tugas.lampiran_tugas'
                         )
                     ->get();
+
         return view('siswa_nilai', compact('mapels', 'noTugas', 'tugass'));
     }
 }

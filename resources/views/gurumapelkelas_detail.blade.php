@@ -181,72 +181,68 @@
         </div>
     </div>
 
-    @foreach ($tugass as $tugas)
-        <div id="lihatTugasModal{{$tugas->id}}" class="modal">
+    @foreach ($materis as $materi)
+        <div id="lihatMateriModal{{$materi->id}}" class="modal">
             <div class="modal-content">
-                <b>Lihat Tugas</b>
+                <b>Lihat Materi</b>
                 <div>
-                    <p>Judul Tugas: {{$tugas->judul_tugas}}</p>
+                    <p>Judul Materi: {{$materi->judul_materi}}</p>
                 </div>
 
                 <div>
-                    <p>Deskripsi Tugas: </p>
-                    <p>{{$tugas->isi_tugas}}</p>
+                    <p>Deskripsi Materi: </p>
+                    <p>{{$materi->isi_materi}}</p>
                 </div>
 
                 <div>
-                    <p>Lampiran: <a href="{{Route('downloadTugas', [
-                        'gurumapel' => $idGuruMapel, 
-                        'gurumapelkelas' => $idGuruMapelKelas, 
-                        'idTugas' => $tugas->id_tugas])}}">
-                        {{$tugas->lampiran_tugas}}
+                    <p>Lampiran: <a href="{{Route('downloadMateri', [
+                        'idMateri' => $materi->id_materi])}}">
+                        {{$materi->lampiran_materi}}
                     </a></p>
                 </div>
             </div>
         </div>
 
-        <div id="editTugasModal{{$tugas->id}}" class="modal">
+        <div id="editMateriModal{{$materi->id}}" class="modal">
             <div class="modal-content">
-                <b>Tambah Tugas</b>
+                <b>Tambah Materi</b>
                 @if (session('status'))
                     <div>
                         {{session('status')}}
                     </div>
                 @endif
-                <form action="{{route('editTugas', [
+                <form action="{{route('editMateri', [
                     'gurumapel' => $idGuruMapel, 
                     'gurumapelkelas' => $idGuruMapelKelas, 
-                    'idTugas' => $tugas->id_tugas])}}" method="POST" enctype="multipart/form-data">
+                    'idMateri' => $materi->id_materi])}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div>
-                        <label for="">Judul Tugas</label>
-                        <input type="text" id="judul_tugas" name="judul_tugas" value="{{$tugas->judul_tugas}}">
+                        <label for="">Judul Materi</label>
+                        <input type="text" id="judul_materi" name="judul_materi" value="{{$materi->judul_materi}}">
                     </div>
     
                     <div>
-                        <label for="">Deskripsi Tugas</label>
-                        <textarea type="text" id="isi_tugas" name="isi_tugas" cols="75" rows="5">{{$tugas->isi_tugas}}</textarea>
+                        <label for="">Deskripsi Materi</label>
+                        <textarea type="text" id="isi_materi" name="isi_materi" cols="75" rows="5">{{$materi->isi_materi}}</textarea>
                     </div>
     
                     <div>
-                        <label for="">Lampiran Tugas</label>
-                        <input type="file" id="lampiran_tugas" name="lampiran_tugas">
-                        <a href="{{Route('downloadTugas', [
-                            'gurumapel' => $idGuruMapel, 
-                            'gurumapelkelas' => $idGuruMapelKelas, 
-                            'idTugas' => $tugas->id_tugas])}}">
-                            {{$tugas->lampiran_tugas}}
+                        <label for="">Lampiran Materi</label>
+                        <input type="file" id="lampiran_materi" name="lampiran_materi">
+                        <a href="{{Route('downloadMateri', [
+                            'idMateri' => $materi->id_materi])}}">
+                            {{$materi->lampiran_materi}}
                         </a>
                     </div>
     
                     <div>
-                        <button type="submit">Edit Tugas</button>
+                        <button type="submit">Edit Materi</button>
                     </div>
                 </form>
             </div>
         </div>
 
-        <div id="hapusTugasModal{{$tugas->id}}" class="modal">
+        <div id="hapusMateriModal{{$materi->id}}" class="modal">
             <div class="modal-content">
                 <div>
                     <span>Delete Confirmation!</span>
@@ -255,10 +251,10 @@
                     <span>Apakah anda yakin akan menghapus?</span>
                 </div>
                 <div>
-                    <a href="{{route('hapusTugas', [
+                    <a href="{{route('hapusMateri', [
                         'gurumapel' => $idGuruMapel,
                         'gurumapelkelas' => $idGuruMapelKelas,
-                        'gurumapelkelastugas' => $tugas->id])}}">
+                        'gurumapelkelasmateri' => $materi->id])}}">
                         <button type="button">
                             Hapus
                         </button>
@@ -316,8 +312,6 @@
 
                 <div>
                     <p>Lampiran: <a href="{{Route('downloadTugas', [
-                        'gurumapel' => $idGuruMapel, 
-                        'gurumapelkelas' => $idGuruMapelKelas, 
                         'idTugas' => $tugas->id_tugas])}}">
                         {{$tugas->lampiran_tugas}}
                     </a></p>
@@ -352,8 +346,6 @@
                         <label for="">Lampiran Tugas</label>
                         <input type="file" id="lampiran_tugas" name="lampiran_tugas">
                         <a href="{{Route('downloadTugas', [
-                            'gurumapel' => $idGuruMapel, 
-                            'gurumapelkelas' => $idGuruMapelKelas, 
                             'idTugas' => $tugas->id_tugas])}}">
                             {{$tugas->lampiran_tugas}}
                         </a>

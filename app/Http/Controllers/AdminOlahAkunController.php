@@ -34,6 +34,7 @@ class AdminOlahAkunController extends Controller
                     'profil_gurus.email'
                     )
                 ->paginate(10);
+        
         $siswas = User::leftjoin('profil_siswas', 'users.id', '=', 'profil_siswas.id_siswa')
                 ->where('jenis_akun', 2)
                 ->select(
@@ -48,7 +49,7 @@ class AdminOlahAkunController extends Controller
                     'profil_siswas.id_kelas'
                     )
                 ->paginate(10);
-        //dd($siswas);
+        
         $noguru = 1;
         $nosiswa = 1;
         $mapels = Mapel::get();
@@ -57,21 +58,11 @@ class AdminOlahAkunController extends Controller
     }
 
     public function store(Request $request){
-        /*$mapels = $request->mapel;
-        foreach($mapels as $mapel){
-            dd($mapel);
-        }
-        dd($mapels);*/
-
         $this->validate($request, [
             'username' => 'required|unique:users,username',
             'password' => 'required',
             'jenis_akun' => 'required'
         ]);
-
-        
-        
-        //dd($request);
 
         User::create([
             'username' => $request->username,
@@ -82,7 +73,6 @@ class AdminOlahAkunController extends Controller
         $idakun = User::where('username', $request->only('username'))->value('id');
         $jenisakun = User::where('username', $request->only('username'))->value('jenis_akun');
         $mapels = $request->mapel;
-        
         
         switch($jenisakun){
             case 0:
@@ -187,8 +177,7 @@ class AdminOlahAkunController extends Controller
     }
 
     public function destroy($id){
-        $user = User::where('id', $id)->firstorfail()->delete();
-        //$user->delete();
+        User::where('id', $id)->firstorfail()->delete();
 
         $id_admin = auth()->user()->id;
         $timestamp = Carbon::now()->toDateTimeString();
