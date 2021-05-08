@@ -32,7 +32,7 @@
                         @endif
                     @endforeach
                     <td>
-                        <?php $nilaiRata /= $nNilai?>
+                        <?php if($nNilai!=0){$nilaiRata /= $nNilai;}?>
                         {{$nilaiRata}}
                     </td>
                 </tr>

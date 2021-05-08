@@ -134,9 +134,7 @@
                 <tr>
                     <td>{{$noSiswa++}}</td>
                     <td>
-                        <a href="">
-                            {{$siswa->nisn}}
-                        </a>
+                        {{$siswa->nisn}}
                     </td>
                     <td>
                         {{$siswa->nama}}
@@ -157,25 +155,25 @@
                     {{session('status')}}
                 </div>
             @endif
-            <form action="{{route('tambahTugas', ['gurumapel' => $idGuruMapel, 'gurumapelkelas' => $idGuruMapelKelas])}}" method="POST" enctype="multipart/form-data">
+            <form action="{{route('tambahMateri', ['gurumapel' => $idGuruMapel, 'gurumapelkelas' => $idGuruMapelKelas])}}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div>
-                    <label for="">Judul Tugas</label>
-                    <input type="text" id="judul_tugas" name="judul_tugas">
+                    <label for="">Judul Materi</label>
+                    <input type="text" id="judul_materi" name="judul_materi">
                 </div>
 
                 <div>
-                    <label for="">Deskripsi Tugas</label>
-                    <textarea type="text" id="isi_tugas" name="isi_tugas" cols="75" rows="5"></textarea>
+                    <label for="">Deskripsi Materi</label>
+                    <textarea type="text" id="isi_materi" name="isi_materi" cols="75" rows="5"></textarea>
                 </div>
 
                 <div>
-                    <label for="">Lampiran Tugas</label>
-                    <input type="file" id="lampiran_tugas" name="lampiran_tugas">
+                    <label for="">Lampiran Materi</label>
+                    <input type="file" id="lampiran_materi" name="lampiran_materi">
                 </div>
 
                 <div>
-                    <button type="submit">Tambah Tugas</button>
+                    <button type="submit">Tambah Materi</button>
                 </div>
             </form>
         </div>

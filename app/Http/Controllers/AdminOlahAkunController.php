@@ -59,27 +59,62 @@ class AdminOlahAkunController extends Controller
 
     public function store(Request $request){
         $this->validate($request, [
-            'username' => 'required|unique:users,username',
+            //'username' => 'required|unique:users,username',
             'password' => 'required',
-            'jenis_akun' => 'required'
+            'jenis_akun' => 'required',
+            'nama' => 'required',
+            'tgl_lahir' => 'required',
+            'jenis_kelamin' => 'required',
+            'email' => 'required',
+            'kontak' => 'required',
+
         ]);
 
+        switch($request->jenis_akun){
+            case 1:
+                $this->validate($request, [
+                    'nip' => 'required',
+                    'mapel' => 'required'
+                ]);
+                break;
+            case 2: 
+                $this->validate($request, [
+                    'nisn' => 'required',
+                    'kelas' => 'required'
+                ]);
+                break;
+        }
+
         User::create([
-            'username' => $request->username,
+            'username' => 'NULL',
             'password' => Hash::make($request->password),
             'jenis_akun' => $request->jenis_akun
         ]);
 
-        $idakun = User::where('username', $request->only('username'))->value('id');
-        $jenisakun = User::where('username', $request->only('username'))->value('jenis_akun');
+        //$idakun = User::where('username', $request->only('username'))->value('id');
+        //$jenisakun = User::where('username', $request->only('username'))->value('jenis_akun');
+
+        $idakun = User::latest('created_at')->first();
+        $jenisakun = User::latest('created_at')->first();
+
+        $varJenisAkun = sprintf("%02d", $jenisakun->jenis_akun);
+        $varIdAkun = sprintf("%04d", $idakun->id);
+        $username = $varJenisAkun."".$varIdAkun;
+
+        //dd($idakun, $jenisakun, $username);
+        
+        User::where('id', $idakun->id)
+            ->update(['username' => $username]);
+        
+
         $mapels = $request->mapel;
         
-        switch($jenisakun){
+        switch($jenisakun->jenis_akun){
             case 0:
                 break;
             case 1:
                 ProfilGuru::create([
-                    'id_guru' => $idakun,
+                    'id_guru' => $idakun->id,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,
                     'jenis_kelamin' => $request->jenis_kelamin,
@@ -89,14 +124,14 @@ class AdminOlahAkunController extends Controller
                 ]);
                 foreach($mapels as $mapel){
                     GuruMapelDetail::create([
-                        'id_guru' => $idakun,
+                        'id_guru' => $idakun->id,
                         'id_mapel' => $mapel
                     ]);
                 }
                 break;
             case 2:
                 ProfilSiswa::create([
-                    'id_siswa' => $idakun,
+                    'id_siswa' => $idakun->id,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,
                     'jenis_kelamin' => $request->jenis_kelamin,
@@ -113,7 +148,7 @@ class AdminOlahAkunController extends Controller
 
         Log::create([
             'user_id' => $id_admin,
-            'function' => "Membuat akun ID ".$idakun,
+            'function' => "Membuat akun ID ".$idakun->id,
             'date' => $timestamp
         ]);
         
@@ -121,20 +156,21 @@ class AdminOlahAkunController extends Controller
     }
 
     public function update(Request $request, $idAkun){
+        //dd($idAkun);
         $this->validate($request, [
-            'username' => 'required|unique:users,username,'.$idAkun,
+            //'username' => 'required|unique:users,username,'.$idAkun,
             'password' => 'required',
             'jenis_akun' => 'required'
         ]);
 
-        User::where('id', $request->id)
+        User::where('id', $idAkun)
             ->update([
-            'username' => $request->username,
+            //'username' => $request->username,
             'password' => Hash::make($request->password)
         ]);
 
-        $idAkun = User::where('username', $request->only('username'))->value('id');
-        $jenisakun = User::where('username', $request->only('username'))->value('jenis_akun');
+        $idAkun = User::where('id', $idAkun)->value('id');
+        $jenisakun = User::where('id', $idAkun)->value('jenis_akun');
 
         switch($jenisakun){
             case 0:

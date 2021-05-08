@@ -146,7 +146,7 @@
                         @enderror
                     </div>
         
-                    <div>
+                    <div style="display:none">
                         <label for="">Username</label>
                         <input type="text" name="username" id="username" value="{{old('username')}}">
                         @error('username')
@@ -345,7 +345,7 @@
             
                         <div>
                             <label for="">Username</label>
-                            <input type="text" name="username" id="username" value="{{$guru->username}}">
+                            <input type="text" name="username" id="username" value="{{$guru->username}}" disabled>
                             @error('username')
                                 <div>
                                     {{$message}}
@@ -521,7 +521,7 @@
             
                         <div>
                             <label for="">Username</label>
-                            <input type="text" name="username" id="username" value="{{$siswa->username}}">
+                            <input type="text" name="username" id="username" value="{{$siswa->username}}" disabled>
                             @error('username')
                                 <div>
                                     {{$message}}

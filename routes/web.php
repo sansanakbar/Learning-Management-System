@@ -62,12 +62,12 @@ Route::get('/gurumapel/{gurumapel}/destroy/{idGuruMapelKelas}', [GuruMapelKelasC
 
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMapelKelasDetailController::class, 'index'])->name('gurumapelkelasdetail');
 
-Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMateriController::class, 'store'])->name('tambahMateri');
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/tambah/materi', [GuruMateriController::class, 'store'])->name('tambahMateri');
 Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/update/materi/{idMateri}', [GuruMateriController::class, 'update'])->name('editMateri');
 Route::get('download/materi/{idMateri}', [GuruMateriController::class, 'download'])->name('downloadMateri');
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/destroy/materi/{gurumapelkelasmateri}', [GuruMateriController::class, 'destroy'])->name('hapusMateri');
 
-Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruTugasController::class, 'store'])->name('tambahTugas');
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/tambah/tugas', [GuruTugasController::class, 'store'])->name('tambahTugas');
 Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/update/tugas/{idTugas}', [GuruTugasController::class, 'update'])->name('editTugas');
 Route::get('/download/tugas/{idTugas}', [GuruTugasController::class, 'download'])->name('downloadTugas');
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/destroy/tugas/{gurumapelkelastugas}', [GuruTugasController::class, 'destroy'])->name('hapusTugas');

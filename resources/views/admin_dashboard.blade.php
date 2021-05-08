@@ -6,6 +6,10 @@
     </div>
 
     <div>
+        <span>Selamat Datang, Administrator<span>
+    </div>
+    
+    <div>
         <div>
             <p>Jumlah User: {{$usersCount}}</p>
         </div>
@@ -29,8 +33,6 @@
         </div>
     </div>
 
-    <div>
-        <span>Selamat Datang, Administrator<span>
-    </div>
+    
 @endsection
 

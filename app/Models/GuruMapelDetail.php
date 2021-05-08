@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class GuruMapelDetail extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'id_guru',
+        'id_mapel'
+    ];
 }

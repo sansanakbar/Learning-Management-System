@@ -26,7 +26,9 @@ class GuruMapelKelasController extends Controller
                 ->orderBy('kelas.tahun_kelas')
                 ->get();
 
-        $allKelass = Kelas::get();
+        $allKelass = Kelas::orderBy('kelas.no_kelas')
+        ->orderBy('kelas.tahun_kelas')
+        ->get();
 
         $mapel = GuruMapelDetail::join('mapels', 'guru_mapel_details.id_mapel', '=', 'mapels.id')
                 ->where('guru_mapel_details.id', $guruMapel)

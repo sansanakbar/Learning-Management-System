@@ -44,6 +44,14 @@
             </div>
 
             <div>
+                <p>Nilai: {{$jawaban->nilai_jawabantugas}}</p>
+            </div>
+
+            <div>
+                <p>Catatan Guru: {{$jawaban->evaluasi_jawabantugas}}</p>
+            </div>
+
+            <div>
                 <button type="button" data-toggle="modal" data-target="#hapusJawabanTugas">
                     Hapus Jawaban
                 </button>
