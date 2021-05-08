@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\GuruMapelKelasMateriDetail;
-use App\Models\GuruMapelKelasTugasDetail;
+use Carbon\Carbon;
+use App\Models\Log;
+use App\Models\Kelas;
+use App\Models\Mapel;
+use App\Models\Materi;
 use App\Models\ProfilSiswa;
 use Illuminate\Http\Request;
+use App\Models\GuruMapelDetail;
 use Illuminate\Support\Facades\DB;
+use App\Models\GuruMapelKelasDetail;
+use App\Models\GuruMapelKelasTugasDetail;
+use App\Models\GuruMapelKelasMateriDetail;
 
 class GuruMapelKelasDetailController extends Controller
 {
@@ -15,6 +22,12 @@ class GuruMapelKelasDetailController extends Controller
     } 
     
     public function index($idGuruMapel, $idGuruMapelKelas){
+        $idKelas = GuruMapelKelasDetail::where('id', $idGuruMapelKelas)->value('id_kelas');
+        $kelas = Kelas::where('id', $idKelas)->first();
+        
+        $idMapel = GuruMapelDetail::where('id', $idGuruMapel)->value('id_mapel');
+        $mapel = Mapel::where('id', $idMapel)->first();
+        
         $noMateri = 1;
         $materis = GuruMapelKelasMateriDetail::join('materis', 'gurumapelkelas_materi_details.id_materi', '=', 'materis.id')
                     ->where('id_gurumapelkelas', $idGuruMapelKelas)
@@ -36,6 +49,6 @@ class GuruMapelKelasDetailController extends Controller
         return view('gurumapelkelas_detail', [
             'gurumapel' => $idGuruMapel,
             'gurumapelkelas' => $idGuruMapelKelas
-        ], compact('materis', 'noMateri', 'noTugas', 'tugass', 'noSiswa', 'siswas'));
+        ], compact('materis', 'noMateri', 'noTugas', 'tugass', 'noSiswa', 'siswas', 'kelas', 'mapel', 'idGuruMapel', 'idGuruMapelKelas'));
     }
 }

@@ -9,4 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class JawabanTugas extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $fillable = [
+        'isi_jawabantugas',
+        'lampiran_jawabantugas',
+        'path',
+        'nilai_jawabantugas',
+        'evaluasi_jawabantugas'
+    ];
 }

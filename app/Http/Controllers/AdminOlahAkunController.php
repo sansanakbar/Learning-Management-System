@@ -88,7 +88,7 @@ class AdminOlahAkunController extends Controller
             case 0:
                 break;
             case 1:
-                ProfilGuru::insert([
+                ProfilGuru::create([
                     'id_guru' => $idakun,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,
@@ -98,14 +98,14 @@ class AdminOlahAkunController extends Controller
                     'nip' => $request->nip
                 ]);
                 foreach($mapels as $mapel){
-                    GuruMapelDetail::insert([
+                    GuruMapelDetail::create([
                         'id_guru' => $idakun,
                         'id_mapel' => $mapel
                     ]);
                 }
                 break;
             case 2:
-                ProfilSiswa::insert([
+                ProfilSiswa::create([
                     'id_siswa' => $idakun,
                     'nama' => $request->nama,
                     'tgl_lahir' => $request->tgl_lahir,

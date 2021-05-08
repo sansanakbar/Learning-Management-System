@@ -11,4 +11,8 @@ class GuruMapelKelasTugasDetail extends Model
     use HasFactory, SoftDeletes;
     protected $table = 'gurumapelkelas_tugas_details';
 
+    protected $fillable = [
+        'id_gurumapelkelas',
+        'id_tugas'
+    ];
 }

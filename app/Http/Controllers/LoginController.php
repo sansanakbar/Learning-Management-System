@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Log;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -27,8 +28,8 @@ class LoginController extends Controller
             return back()->with('status', 'Username atau password salah');
         }
 
-        $jenis_akun = DB::table('users')->where('username', $request->only('username'))->value('jenis_akun');
-        $id_akun = DB::table('users')->where('username', $request->only('username'))->value('id');
+        $jenis_akun = User::where('username', $request->only('username'))->value('jenis_akun');
+        $id_akun = User::where('username', $request->only('username'))->value('id');
         $timestamp = Carbon::now()->toDateTimeString();
 
         Log::create([

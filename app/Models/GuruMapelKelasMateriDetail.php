@@ -10,5 +10,10 @@ class GuruMapelKelasMateriDetail extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'gurumapelkelas_materi_details';
+
+    protected $fillable = [
+        'id_gurumapelkelas',
+        'id_materi'
+    ];
 }
 

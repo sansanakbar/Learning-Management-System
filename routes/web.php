@@ -1,10 +1,13 @@
 <?php
 
+use App\Models\GuruMapelKelasDetail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\AdminLogController;
 use App\Http\Controllers\GuruMapelController;
+use App\Http\Controllers\GuruTugasController;
+use App\Http\Controllers\GuruMateriController;
 use App\Http\Controllers\SiswaMapelController;
 use App\Http\Controllers\SiswaNilaiController;
 use App\Http\Controllers\AdminOlahAkunController;
@@ -12,6 +15,7 @@ use App\Http\Controllers\GuruDashboardController;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\GuruMapelKelasController;
 use App\Http\Controllers\SiswaDashboardController;
+use App\Http\Controllers\GuruJawabanTugasController;
 use App\Http\Controllers\SiswaMapelDetailController;
 use App\Http\Controllers\SiswaJawabanTugasController;
 use App\Http\Controllers\GuruMapelKelasDetailController;
@@ -56,6 +60,19 @@ Route::post('/gurumapel/{gurumapel}', [GuruMapelKelasController::class, 'store']
 Route::get('/gurumapel/{gurumapel}/destroy/{idGuruMapelKelas}', [GuruMapelKelasController::class, 'destroy'])->name('hapusGuruMapelKelas');
 
 Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMapelKelasDetailController::class, 'index'])->name('gurumapelkelasdetail');
+
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruMateriController::class, 'store'])->name('tambahMateri');
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/update/materi/{idMateri}', [GuruMateriController::class, 'update'])->name('editMateri');
+Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/download/materi/{idMateri}', [GuruMateriController::class, 'download'])->name('downloadMateri');
+Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/destroy/materi/{gurumapelkelasmateri}', [GuruMateriController::class, 'destroy'])->name('hapusMateri');
+
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}', [GuruTugasController::class, 'store'])->name('tambahTugas');
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/update/tugas/{idTugas}', [GuruTugasController::class, 'update'])->name('editTugas');
+Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/download/tugas/{idTugas}', [GuruTugasController::class, 'download'])->name('downloadTugas');
+Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/destroy/tugas/{gurumapelkelastugas}', [GuruTugasController::class, 'destroy'])->name('hapusTugas');
+
+Route::get('/gurumapel/{gurumapel}/{gurumapelkelas}/{gurumapelkelastugas}', [GuruJawabanTugasController::class, 'index'])->name('guruJawabanTugas');
+Route::post('/gurumapel/{gurumapel}/{gurumapelkelas}/{gurumapelkelastugas}/nilai/{idJawabanTugas}', [GuruJawabanTugasController::class, 'update'])->name('nilaiJawabanTugas');
 
 Route::get('/siswadashboard', [SiswaDashboardController::class, 'index'])->name('siswadashboard');
 
